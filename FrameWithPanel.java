@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -20,7 +22,7 @@ public class FrameWithPanel extends JFrame {
 		JButton button1, button2, button3, button4, button5;
 		JButton buttons1, buttons2, buttons3, buttons4;
 		Container cp = null;
-		JPanel[] panel = new JPanel[4];
+		JPanel[] panel = new JPanel[10];
 		JLabel label1, label2, label3, label4, label5;
 		ImageIcon icon1, icon2, icon3, icon4, icon5;
 
@@ -44,15 +46,20 @@ public class FrameWithPanel extends JFrame {
 		label4 = new JLabel(icon4, SwingConstants.CENTER);
 		button4.add(label4);
 
+		button4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			setVisible(false);//隐藏窗体
+			System.exit(0);//退出程序
+			}
+			});
+		
 		panel[1] = new JPanel();
 		panel[1].setBackground(Color.WHITE);
 
 		panel[2] = new JPanel(new GridLayout(1, 4));
 		panel[3] = new JPanel(new GridLayout(0, 1));
-
-		/*
-		 * panel[3].setOpaque(false); panel[3].setSize(33,33);
-		 */
+		panel[0] = new JPanel(new GridLayout(0, 1));
+		
 		panel[3].add(button1);
 		button1.add(label1);
 
@@ -65,23 +72,24 @@ public class FrameWithPanel extends JFrame {
 		panel[3].add(button4);
 		button4.add(label4);
 
-		// panel[2].setLayout(GridLayout(45,55));
 		buttons1 = new JButton("远程监控");
 		buttons2 = new JButton("传输文件");
-		buttons3 = new JButton("控制鼠标");
-		buttons4 = new JButton("显示时间");
+		buttons3 = new JButton("截取屏幕");
+//		buttons4 = new JButton();
+
 		panel[2].add(buttons1);
 		panel[2].add(buttons2);
 		panel[2].add(buttons3);
-		panel[2].add(buttons4);
+//		panel[2].add(buttons4);
 
-//		NowTime nowtime = new NowTime();
-//		buttons4.add(nowtime);
+		NowTime nowtime = new NowTime();
+		panel[0].add(nowtime);
 		
 		cp = getContentPane();
 		cp.add(panel[1], BorderLayout.CENTER);
 		cp.add(panel[2], BorderLayout.NORTH);
 		cp.add(panel[3], BorderLayout.EAST);
+		panel[2].add(panel[0], BorderLayout.EAST);
 		setSize(700, 700);
 	}
 
