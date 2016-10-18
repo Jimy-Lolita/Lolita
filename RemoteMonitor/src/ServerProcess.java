@@ -1,4 +1,6 @@
+package Server;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -7,16 +9,17 @@ import java.util.ArrayList;
 
 public class ServerProcess extends ArrayList {
 	private SocketManager socketMan = new SocketManager();
-
+	private ServerSocket serverSocket;
+	public void open() throws IOException {
+		serverSocket = new ServerSocket(7788);
+		System.out.println("服务器套接字已经创建");
+	}
 	void getServer() {
 		try {
-			ServerSocket serverSocket = new ServerSocket(7788);
-			System.out.println("服务器套接字已经创建");
 			while (true) {
 				Socket socket = serverSocket.accept();
 				new write_Thread(socket).start();
 				socketMan.add(socket);
-//				socketMan.sendClientCount();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

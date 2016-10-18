@@ -1,108 +1,66 @@
-import java.awt.*;
-import java.awt.event.*;
+package Server;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
-import javax.swing.*;
+public class RemoteMonitor extends Thread {
+	private Dimension screenSize;
+	private Rectangle rectangle;
+	private Robot robot;
 
-//捕获屏幕
-public class ScreenShot1 extends JFrame implements ActionListener {
-
-	private ScreenCaptureUtil scrCaptureUtil = null;// 捕获屏幕的工具类
-	private PaintCanvas canvas = null;// 画布，用于画捕获到的屏幕图像
-
-	public ScreenShot1() {
-		super("Screen Capture");
-		init();
+	public RemoteMonitor() {
+		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		rectangle = new Rectangle(screenSize);// 可以指定捕获屏幕区域
+		try {
+			robot = new Robot();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
 	}
 
-	//初始化
-	private void init() {
+	public void run() {
+		ZipOutputStream os = null;
+		Socket socket = null;
+		while (true) {
+			try {
+				socket = new Socket("localhost", 5001);// 连接远程IP
+				BufferedImage image = robot.createScreenCapture(rectangle);// 捕获制定屏幕矩形区域
+				os = new ZipOutputStream(socket.getOutputStream());// 加入压缩流
 
-		scrCaptureUtil = new ScreenCaptureUtil();// 创建抓屏工具，建立对象
-		canvas = new PaintCanvas(scrCaptureUtil);// 创建画布
-
-		Container cp= this.getContentPane();
-		cp.setLayout(new BorderLayout());
-		cp.add(canvas, BorderLayout.CENTER);
-
-		JButton capButton = new JButton("抓 屏");
-		cp.add(capButton, BorderLayout.SOUTH);
-		capButton.addActionListener(this);
-		this.setSize(400, 400);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-	}
-	
-// 点击“抓屏”按钮时，在画布上画屏幕图像
-	public void actionPerformed(ActionEvent e) {
-		canvas.drawScreen();
+				os.setLevel(9);
+				os.putNextEntry(new ZipEntry("test.jpg"));
+				JPEGCodec.createJPEGEncoder(os).encode(image);// 图像编码成JPEG
+				os.close();
+				Thread.sleep(50);// 每秒20帧
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (os != null) {
+					try {
+						os.close();
+					} catch (Exception ioe) {
+					}
+				}
+				if (socket != null) {
+					try {
+						socket.close();
+					} catch (IOException e) {
+					}
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) {
-		new ScreenShot1();
+		new ServerShoots().start();
 	}
 }
-
-
-// 抓屏工具类
-class ScreenCaptureUtil {
-	private Robot robot = null;// 抓屏的主要工具类
-	private Rectangle scrRect = null;// 屏幕的矩形图像
-
-	public ScreenCaptureUtil() {
-		try {
-			robot = new Robot();// 创建一个抓屏工具
-		} catch (Exception ex) {
-			System.out.println(ex.toString());
-		}
-		// 获取屏幕的矩形图像
-		Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
-		scrRect = new Rectangle(0, 0, scrSize.width, scrSize.height);
-	}
-
-	//抓屏方法,返回一个图像 
-	public BufferedImage captureScreen() {
-		BufferedImage scrImg = null;
-		try {
-			scrImg = robot.createScreenCapture(scrRect);// 抓的是全屏图
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return scrImg;
-	}
-}
-
-// 画布类，用于显示抓屏得到的图像
-
-class PaintCanvas extends JPanel {
-	private ScreenCaptureUtil scrCaptureUtil = null;// 抓屏工具
-	private BufferedImage scrImg = null;// 待画的图像　
-
-	public PaintCanvas(ScreenCaptureUtil screenUtil) {
-		this.scrCaptureUtil = screenUtil;
-	}
-
-	
-	// 重载JPanel的paintComponent，用于画背景
-	protected void paintComponent(Graphics g) {
-		if (scrImg != null) {
-			int iWidth = this.getWidth();
-			int iHeight = this.getHeight();
-			g.drawImage(scrImg, 0, 0, iWidth, iHeight, 0, 0, scrImg.getWidth(),
-					scrImg.getHeight(), null);
-		}
-	}
-
-// 画屏幕图像的方法
-
-	public void drawScreen() {
-		Graphics g = this.getGraphics();
-		scrImg = scrCaptureUtil.captureScreen();// 抓屏，获取屏幕图像
-		if (scrImg != null) {
-			this.paintComponent(g);// 画图
-		}
-		g.dispose();// 释放资源
-	}
-
-}
-
