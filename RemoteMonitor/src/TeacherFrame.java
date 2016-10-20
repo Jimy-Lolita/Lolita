@@ -42,29 +42,45 @@ public class TeacherFrame extends JFrame implements Runnable{
 //		panel[6] = new JPanel(new GridLayout(0, 1));//占位
 		
 		button[1] = new JButton();
-		icon[1] = new ImageIcon("images/005.jpg");
-		label[1] = new JLabel(icon[1], SwingConstants.CENTER);
-		button[1].add(label[1]);
-		
+		button[1].setIcon(new javax.swing.ImageIcon("images/001.jpg")); 
+
 		button[2] = new JButton("远程监控");
+		button[2].setIcon(new javax.swing.ImageIcon("images/002.jpg")); 
+		
 		button[3] = new JButton("屏幕截图");
+		button[3].setIcon(new javax.swing.ImageIcon("images/003.jpg")); 
+		
 		button[4] = new JButton("传输文件");
+		button[4].setIcon(new javax.swing.ImageIcon("images/004.jpg")); 
+
+		button[5] = new JButton("music");
+		button[5].setIcon(new javax.swing.ImageIcon("images/005.jpg")); 
+		
+		button[6] = new JButton("视频");
+		button[6].setIcon(new javax.swing.ImageIcon("images/006.jpg"));
 		
 		button[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Screenshots sr = new Screenshots();
 			}
 		});
+
+			button[4].addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FileChooser csr = new FileChooser();
+				csr.setVisible(true);
+			}
+		});
 		
-		button[5] = new JButton("001");
-		button[6] = new JButton("hhh");
-		button[7] = new JButton("hhh");
-		button[8] = new JButton("hhh");
-		button[9] = new JButton("hhh");
-		button[10] = new JButton("hhh");
-		button[11] = new JButton("hhh");
-		button[12] = new JButton("hhh");
-		
+		button[7] = new JButton();
+		button[8] = new JButton();
+		button[9] = new JButton();
+		button[10] = new JButton();
+		button[11] = new JButton();
+		button[12] = new JButton();
+		button[13] = new JButton();
+		button[14] = new JButton();
+
 		cp = getContentPane();
 		
 		cp.add(panel[1],BorderLayout.NORTH);	
@@ -79,16 +95,17 @@ public class TeacherFrame extends JFrame implements Runnable{
 		panel[1].add(button[3]);
 		panel[1].add(button[4]);
 		
-		panel[2].add(button[5]);
-		panel[2].add(button[6]);
+		panel[1].add(button[5]);
+		panel[1].add(button[6]);
+		
 		panel[2].add(button[7]);
 		panel[2].add(button[8]);
-		
 		panel[2].add(button[9]);
 		panel[2].add(button[10]);
 		panel[2].add(button[11]);
 		panel[2].add(button[12]);		
-		
+		panel[2].add(button[13]);
+		panel[2].add(button[14]);	
 		cp.add(panel[3],BorderLayout.SOUTH);
 
 		panel[3].add(panel[4]);
