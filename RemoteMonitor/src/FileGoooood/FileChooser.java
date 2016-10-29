@@ -1,4 +1,4 @@
-package Server;
+package FileGoooood;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -23,13 +23,13 @@ public class FileChooser extends JFrame implements ActionListener{
        // TODO Auto-generated method stub  
        JFileChooser jfc=new JFileChooser();  
        jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES );  
-       jfc.showDialog(new JLabel(), "Ñ¡Ôñ");  
+       jfc.showDialog(new JLabel(), "Ñ¡ï¿½ï¿½");  
        File file=jfc.getSelectedFile();  
        
        if(file.isDirectory()){  
-           System.out.println("ÎÄ¼þ¼Ð:"+file.getAbsolutePath());  
+           System.out.println("ï¿½Ä¼ï¿½ï¿½ï¿½:"+file.getAbsolutePath());  
        }else if(file.isFile()){  
-           System.out.println("ÎÄ¼þ:"+file.getAbsolutePath());  
+           System.out.println("ï¿½Ä¼ï¿½:"+file.getAbsolutePath());  
        }  
        System.out.println(jfc.getSelectedFile().getName());  
          

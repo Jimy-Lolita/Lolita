@@ -1,3 +1,4 @@
+package Server;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -8,10 +9,10 @@ import java.util.ArrayList;
 public class ServerProcess extends ArrayList {
 	private SocketManager socketMan = new SocketManager();
 
-	void getServer() {
+	public void getServer() {
 		try {
 			ServerSocket serverSocket = new ServerSocket(7788);
-			System.out.println("·þÎñÆ÷Ì×½Ó×ÖÒÑ¾­´´½¨");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½");
 			while (true) {
 				Socket socket = serverSocket.accept();
 				new write_Thread(socket).start();
@@ -50,5 +51,10 @@ public class ServerProcess extends ArrayList {
 	public static void main(String args[]) {
 		ServerProcess server = new ServerProcess();
 		server.getServer();
+	}
+
+	public void open() {
+		// TODO Auto-generated method stub
+		
 	}
 }

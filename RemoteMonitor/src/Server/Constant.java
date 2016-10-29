@@ -1,4 +1,4 @@
-package ServerWhat;
+package Server;
 
 public class Constant {
 	//客户端连接服务器的socket地址

@@ -1,3 +1,4 @@
+package Server;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -24,13 +25,13 @@ public class SocketManager extends ArrayList{
 		}
 	}
 /*	synchronized void sendClientInfo(){
-		String info = "当前聊天人数"+size();
+		String info = "锟斤拷前锟斤拷锟斤拷锟斤拷锟斤拷"+size();
 		System.out.println(info);
 		sendToAll(info);
 	}
 	
 	synchronized void sendClientCount() {
-		String info = "聊天人数变化，当前为" + size() + "人在线！\n";
+		String info = "锟斤拷锟斤拷锟斤拷锟斤拷锟戒化锟斤拷锟斤拷前为" + size() + "锟斤拷锟斤拷锟竭ｏ拷\n";
 		System.out.println(info);
 		sendToAll(info);
 

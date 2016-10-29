@@ -1,3 +1,5 @@
+
+package Server;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,21 +12,21 @@ import javax.swing.Timer;
 import javax.swing.JFrame;
 
 public class NowTime extends  JPanel {
-	// Ìí¼Ó ÏÔÊ¾Ê±¼äµÄJLabel
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¾Ê±ï¿½ï¿½ï¿½JLabel
 	public NowTime() {
 		JLabel time = new JLabel();
 		add(time);
 		this.setTimer(time);
 	}
 
-	// ÉèÖÃTimer 1000msÊµÏÖÒ»´Î¶¯×÷ Êµ¼ÊÊÇÒ»¸öÏß³Ì
+	// ï¿½ï¿½ï¿½ï¿½Timer 1000msÊµï¿½ï¿½Ò»ï¿½Î¶ï¿½ï¿½ï¿½ Êµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³ï¿½
 	private void setTimer(JLabel time) {
 		final JLabel varTime = time;
 		Timer timeAction = new Timer(1000, new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				long timemillis = System.currentTimeMillis();
-				// ×ª»»ÈÕÆÚÏÔÊ¾¸ñÊ½
+				// ×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê½
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				varTime.setText(df.format(new Date(timemillis)));
 			}
@@ -32,7 +34,7 @@ public class NowTime extends  JPanel {
 		timeAction.start();
 	}
 
-	// ÔËÐÐ·½·¨
+	// ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½
 	public static void main(String[] args) {
 		NowTime timeFrame = new NowTime();
 		timeFrame.setSize(160, 80);

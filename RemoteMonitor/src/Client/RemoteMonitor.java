@@ -11,7 +11,7 @@ import java.util.zip.ZipOutputStream;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
-import ServerWhat.Constant;
+import Server.Constant;
 
 public class RemoteMonitor extends Thread {
 	private Dimension screenSize;

@@ -1,3 +1,4 @@
+package Server;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,9 +22,9 @@ public class ToolsWindow extends JWindow{
 
 		this.parent=parent;
 		this.init();
-		//½«×é¼þÒÆµ½(x,y)µÄÎ»ÖÃ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½(x,y)ï¿½ï¿½Î»ï¿½ï¿½
 		this.setLocation(x, y);
-		//µ÷Õû´°¿ÚµÄ´óÐ¡À´ÊÊÓ¦¿Ø¼þ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÚµÄ´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ø¼ï¿½
 		this.pack();
 		this.setVisible(true);
 	}
@@ -31,10 +32,10 @@ public class ToolsWindow extends JWindow{
 	private void init() {
 
 		this.setLayout(new BorderLayout());
-		JToolBar toolBar=new JToolBar("Java½ØÍ¼");
+		JToolBar toolBar=new JToolBar("Javaï¿½ï¿½Í¼");
 		
 		
-		//±£´æ°´Å¥
+		//ï¿½ï¿½ï¿½æ°´Å¥
 		JButton saveButton=new JButton(new ImageIcon("src/images/SaveIcon.gif"));
 		saveButton.addActionListener(new ActionListener() {
 			
@@ -50,7 +51,7 @@ public class ToolsWindow extends JWindow{
 		});
 		toolBar.add(saveButton);
 		
-		//¹Ø±Õ°´Å¥
+		//ï¿½Ø±Õ°ï¿½Å¥
 		JButton closedButton=new JButton(new ImageIcon("src/images/closedIcon.gif"));
 		closedButton.addActionListener(new ActionListener() {
 			

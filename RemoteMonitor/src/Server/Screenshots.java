@@ -1,3 +1,4 @@
+package Server;
 import java.awt.AWTException;
 import java.awt.EventQueue;
 

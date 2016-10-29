@@ -1,4 +1,4 @@
-package Server;
+package ServerGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -16,6 +16,11 @@ import java.net.Socket;
 
 import javax.swing.*;
 
+import FileGoooood.FileChooser;
+import Server.NowTime;
+import Server.Screenshots;
+import Server.ServerProcess;
+
 public class TeacherFrame extends JFrame implements Runnable{
 
 	private BufferedReader reader;
@@ -26,38 +31,35 @@ public class TeacherFrame extends JFrame implements Runnable{
 	JTextField Sendtext = new JTextField(20);
 
 	public  TeacherFrame(String name){    
-		JPanel[] panel = new JPanel[10];
-		JButton[] button = new JButton[20];
-		JLabel[] label = new JLabel[10];
+		JPanel[] panel = new JPanel[100];
+		JButton[] button = new JButton[100];
+		JLabel[] label = new JLabel[100];
 		ImageIcon[] icon = new ImageIcon[10];
 		
 		Container cp = null;
 		
-		panel[1] = new JPanel(new GridLayout(1, 0));//菜单
+		panel[1] = new JPanel(new GridLayout(1, 0));//锟剿碉拷
 		panel[1].setPreferredSize(new Dimension(685, 175));
-		panel[2] = new JPanel(new GridLayout(2, 4));//显示桌面
-		panel[3] = new JPanel();//文本输入  + time 
-		panel[4] = new JPanel();//文本输入
-		panel[5] = new JPanel();//time
-//		panel[6] = new JPanel(new GridLayout(0, 1));//占位
+		panel[2] = new JPanel(new GridLayout(10, 4));//锟斤拷示锟斤拷锟斤拷
+		panel[3] = new JPanel();// 文本输入 + time
+		panel[4] = new JPanel();// 文本输入
+		panel[5] = new JPanel();// time
+		panel[6] = new JPanel();// 第一个
 		
 		button[1] = new JButton();
 		button[1].setIcon(new javax.swing.ImageIcon("images/001.jpg")); 
 
-		button[2] = new JButton("远程监控");
-		button[2].setIcon(new javax.swing.ImageIcon("images/002.jpg")); 
+		button[2] = new JButton(" ");
+		button[2].setIcon(new javax.swing.ImageIcon("images/002rm.jpg")); 
 		
-		button[3] = new JButton("屏幕截图");
-		button[3].setIcon(new javax.swing.ImageIcon("images/003.jpg")); 
+		button[3] = new JButton(" ");
+		button[3].setIcon(new javax.swing.ImageIcon("images/003shots.jpg")); 
 		
-		button[4] = new JButton("传输文件");
-		button[4].setIcon(new javax.swing.ImageIcon("images/004.jpg")); 
+		button[4] = new JButton(" ");
+		button[4].setIcon(new javax.swing.ImageIcon("images/004file.jpg")); 
 
-		button[5] = new JButton("music");
-		button[5].setIcon(new javax.swing.ImageIcon("images/005.jpg")); 
-		
-		button[6] = new JButton("视频");
-		button[6].setIcon(new javax.swing.ImageIcon("images/006.jpg"));
+		button[5] = new JButton(" ");
+		button[5].setIcon(new javax.swing.ImageIcon("images/001.jpg")); 
 		
 		button[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,42 +74,30 @@ public class TeacherFrame extends JFrame implements Runnable{
 			}
 		});
 		
-		button[7] = new JButton();
-		button[8] = new JButton();
-		button[9] = new JButton();
-		button[10] = new JButton();
-		button[11] = new JButton();
-		button[12] = new JButton();
-		button[13] = new JButton();
-		button[14] = new JButton();
+		for(int i = 6; i < 57 ; i ++){
+				button[i] = new JButton();
+			}
 
 		cp = getContentPane();
 		
 		cp.add(panel[1],BorderLayout.NORTH);	
 		JScrollPane scrollPane = new JScrollPane(panel[2]);
 		scrollPane.setBounds(10, 10, 675, 200);
-		panel[2].setPreferredSize(new Dimension(985, 550));
+		panel[2].setPreferredSize(new Dimension(985, 2750));
 		scrollPane.setLocation(0, 153);
 		cp.add(scrollPane);
 	
-		panel[1].add(button[1]);
-		panel[1].add(button[2]);
-		panel[1].add(button[3]);
-		panel[1].add(button[4]);
-		
-		panel[1].add(button[5]);
-		panel[1].add(button[6]);
-		
-		panel[2].add(button[7]);
-		panel[2].add(button[8]);
-		panel[2].add(button[9]);
-		panel[2].add(button[10]);
-		panel[2].add(button[11]);
-		panel[2].add(button[12]);		
-		panel[2].add(button[13]);
-		panel[2].add(button[14]);	
-		cp.add(panel[3],BorderLayout.SOUTH);
+		for(int i = 1; i < 6 ; i ++){
+			panel[1].add(button[i]);
+		}
 
+		panel[2].add(panel[6]);
+		for(int i = 6; i < 55 ; i ++){
+			panel[2].add(button[i]);
+		}
+		
+		
+		cp.add(panel[3],BorderLayout.SOUTH);
 		panel[3].add(panel[4]);
 		panel[3].add(panel[5]);
 		panel[4].add(Viewtext,BorderLayout.NORTH);
@@ -132,16 +122,11 @@ public class TeacherFrame extends JFrame implements Runnable{
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-	public static void main(String args[]){
+	public static void main(String args[]) throws IOException{
 		ServerProcess server = new ServerProcess();
-		try {
-			server.open();
-			new TeacherFrame("FarContrl");
-			server.getServer();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		server.open();
+		new TeacherFrame("FarContrl");
+		server.getServer();
 	}
 	public void run() {
 		while (true) {

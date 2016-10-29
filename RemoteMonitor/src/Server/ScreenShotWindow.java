@@ -1,4 +1,4 @@
-
+package Server;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,7 +25,7 @@ import javax.swing.JWindow;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
-//Jwindow Ò²ÊÇËÄ´ó¶¥¼¶×é¼þÖ®Ò»£¬µØÎ»µÈÍ¬ÓÚJFrame£¬ÊÇÒ»¸öÎÞ±êÌâÀ¸µÄ´°¿Ú
+//Jwindow Ò²ï¿½ï¿½ï¿½Ä´ó¶¥¼ï¿½ï¿½ï¿½ï¿½Ö®Ò»ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Í¬ï¿½ï¿½JFrameï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Þ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 public class ScreenShotWindow extends JWindow {
 
 	
@@ -37,8 +37,8 @@ public class ScreenShotWindow extends JWindow {
 
 	private int orgx,orgy,endx,endy;
 	
-	/**imageµÄ×÷ÓÃ:
-	 * 1.»ñÈ¡Õû¸öÆÁÄ»µÄ½ØÍ¼*/
+	/**imageï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:
+	 * 1.ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½Ä½ï¿½Í¼*/
 	private BufferedImage image=null;
 	private BufferedImage tempImage=null;
 	private BufferedImage saveImage=null;
@@ -48,24 +48,24 @@ public class ScreenShotWindow extends JWindow {
 	
 	public ScreenShotWindow() throws AWTException {
 		
-		//»ñÈ¡Ä¬ÈÏÆÁÄ»Éè±¸
+		//ï¿½ï¿½È¡Ä¬ï¿½ï¿½ï¿½ï¿½Ä»ï¿½è±¸
 		GraphicsEnvironment environment=GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice screen=environment.getDefaultScreenDevice();
 		
-        //»ñÈ¡ÆÁÄ»³ß´ç
+        //ï¿½ï¿½È¡ï¿½ï¿½Ä»ï¿½ß´ï¿½
 		Dimension d=Toolkit.getDefaultToolkit().getScreenSize();
 		this.setBounds(0, 0, d.width, d.height);
-		//»ñÈ¡ÆÁÄ»½ØÍ¼
+		//ï¿½ï¿½È¡ï¿½ï¿½Ä»ï¿½ï¿½Í¼
 		Robot robot=new Robot(screen);
 //		Robot robot=new Robot();
 		
 //		image=new BufferedImage((int)d.getWidth(),(int)d.getHeight(),BufferedImage.TYPE_4BYTE_ABGR);
 		image=robot.createScreenCapture(new Rectangle(0, 0, d.width, d.height));
 		
-		//ÉèÖÃÊó±êÇÃ»÷µÄÊ±¼ä¼àÌý
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½
 		this.addMouseListener(new MouseAdapter() {
 			
-			//Êó±ê°´ÏÂµÄÊÂ¼þ¼àÌý
+			//ï¿½ï¿½ê°´ï¿½Âµï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
 			@Override
 			public void mousePressed(MouseEvent e) {
 				
@@ -78,7 +78,7 @@ public class ScreenShotWindow extends JWindow {
 				}
 			}
 			
-			//Êó±êÌ§ÆðµÄÊÂ¼þ¼àÌý
+			//ï¿½ï¿½ï¿½Ì§ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
 			@Override
 			public void mouseReleased(MouseEvent e) {
 
@@ -95,20 +95,20 @@ public class ScreenShotWindow extends JWindow {
 			
 		});
 		
-		//¶ÔÓÚÊó±êÒÆ¶¯µÄ¼àÌý
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 		this.addMouseMotionListener(new MouseMotionAdapter() {
 			
-			//Êó±ê»¬¶¯µÄ¼àÌý
-			//ÔÚ»¬¶¯¹ý³ÌÖÐ»á±»·´¸´µ÷ÓÃ
+			//ï¿½ï¿½ê»¬ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+			//ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»á±»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			@Override
 			public void mouseDragged(MouseEvent e) {
 
 				endx=e.getX();
 				endy=e.getY();
 				
-				//ÁÙÊ±Í¼Ïñ£¬ÓÃÓÚ»º³åÆÁÄ»ÇøÓò·ÅÖÃÆÁÄ»ÉÁË¸
+				//ï¿½ï¿½Ê±Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½Ë¸
 				Image tempImage2=createImage(ScreenShotWindow.this.getWidth(),ScreenShotWindow.this.getHeight());
-				//ÓÃÓÚ»æÍ¼
+				//ï¿½ï¿½ï¿½Ú»ï¿½Í¼
 				Graphics g=tempImage2.getGraphics();
 				g.drawImage(tempImage, 0, 0,null);
 				
@@ -119,12 +119,12 @@ public class ScreenShotWindow extends JWindow {
 				int height=Math.abs(endy-orgy)+1;
 				
 				g.setColor(Color.RED);
-				//±£Ö¤Í¼Æ¬¾ØÐÎ²»±»±ß¿ò¸²¸Ç
+				//ï¿½ï¿½Ö¤Í¼Æ¬ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½ß¿ò¸²¸ï¿½
 				g.drawRect(x-1, y-1, width+1, height+1);
 				
-				//getSubimage(int x,int y,int w,int h)ÓÃÓÚ·µ»Ø¹æ¶¨Î»ÖÃÖÐµÄ¾ØÐÎÍ¼Ïñµ½BufferedImag¶ÔÏóÖÐ
+				//getSubimage(int x,int y,int w,int h)ï¿½ï¿½ï¿½Ú·ï¿½ï¿½Ø¹æ¶¨Î»ï¿½ï¿½ï¿½ÐµÄ¾ï¿½ï¿½ï¿½Í¼ï¿½ï¿½BufferedImagï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				saveImage=image.getSubimage(x, y, width, height);
-				//ÓÃÓÚ»­µ±Ç°Í¼ÏñÖÐµÄ¿ÉÓÃÍ¼Ïñ
+				//ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½Ç°Í¼ï¿½ï¿½ï¿½ÐµÄ¿ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 				g.drawImage(saveImage, x, y, null);
 				
 				ScreenShotWindow.this.getGraphics().drawImage(tempImage2,
@@ -137,30 +137,30 @@ public class ScreenShotWindow extends JWindow {
 		
 	}
 	
-	//ÖØÐ´ÁË»æ»­µÄ·½·¨
+	//ï¿½ï¿½Ð´ï¿½Ë»æ»­ï¿½Ä·ï¿½ï¿½ï¿½
 	@Override
 	public void paint(Graphics g) {
 
 		//new RescaleOp(float[] scaleFactors, float[] offsets, RenderingHints hints)
-		//¹¹ÔìÒ»¸ö¾ßÓÐËùÏ£ÍûµÄËõ·ÅÒò×ÓºÍÆ«ÒÆÁ¿µÄÐÂ RescaleOp¡£
-		//RescaleOp ÊÇÓÐ¹ØÍ¼ÏñËõ·ÅµÄÀà
+		//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óºï¿½Æ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ RescaleOpï¿½ï¿½
+		//RescaleOp ï¿½ï¿½ï¿½Ð¹ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½
 		//RescaleOp.filter(BufferedImage src,BufferedImage dest)
-		//ÓÃÓÚ¶ÔÔ´Í¼Ïñsrc½øÐÐËõ·Å
+		//ï¿½ï¿½ï¿½Ú¶ï¿½Ô´Í¼ï¿½ï¿½srcï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		RescaleOp ro=new RescaleOp(0.8f,0, null);
 		tempImage=ro.filter(image, null);
 		g.drawImage(tempImage, 0, 0, this);
 			
 	}
-	//±£´æÍ¼Ïñµ½ÎÄ¼þ
+	//ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ä¼ï¿½
 	public void saveImage() throws IOException{
 		JFileChooser jfc=new JFileChooser();
-		jfc.setDialogTitle("±£´æ");
+		jfc.setDialogTitle("ï¿½ï¿½ï¿½ï¿½");
 		
-		//ÎÄ¼þ¹ýÂËÆ÷£¬ÓÃ»§¹ýÂË¿ÉÑ¡ÔñµÄÎÄ¼þ
+		//ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ë¿ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 		FileNameExtensionFilter filter=new FileNameExtensionFilter("JPG", "jpg");
 		jfc.setFileFilter(filter);
 		
-		//³õÊ¼»¯Ò»¸öÄ¬ÈÏÎÄ¼þ(´ËÎÄ¼þ»áÉú³ÉÔÚ×ÀÃæ)
+		//ï¿½ï¿½Ê¼ï¿½ï¿½Ò»ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½Ä¼ï¿½(ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyymmddHHmmss");
 		String filename=sdf.format(new Date());
@@ -173,11 +173,11 @@ public class ScreenShotWindow extends JWindow {
 		if(flag==JFileChooser.APPROVE_OPTION){
 			File file=jfc.getSelectedFile();
 			String path=file.getPath();
-			//¼ì²éÎÄ¼þºó×º£¬·ÅÖÃÓÃ»§Íü¼ÇÊäÈëºó×º»òÊäÈë²»ÕýÈ·µÄºó×º
+			//ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½×ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ºï¿½ï¿½ï¿½ï¿½ï¿½ë²»ï¿½ï¿½È·ï¿½Äºï¿½×º
 			if(!(path.endsWith(".jpg")||path.endsWith("JPG"))){
 				path+=".jpg";
 			}
-			//Ð´ÈëÎÄ¼þ
+			//Ð´ï¿½ï¿½ï¿½Ä¼ï¿½
 			ImageIO.write(saveImage, "jpg", new File(path));
 			System.exit(0);
 		}
