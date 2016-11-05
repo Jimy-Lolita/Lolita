@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/ServerGUI/TeacherFrame.java=GBK
+encoding//src/Client/RemoteMonitor.java=UTF-8
+encoding//src/ServerGUI/MainFrameS.java=GBK
 encoding/<project>=GBK
 encoding/src=GBK

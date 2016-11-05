@@ -15,7 +15,7 @@ package Client;
 	import javax.swing.JTextField;
 
 
-public class ClientFrame extends JFrame implements Runnable {
+public class MainFrameC extends JFrame implements Runnable {
 		private JPanel jpanel = new JPanel();
 		private JLabel nameLabel = new JLabel("name:");
 		private JTextField nameField = new JTextField();
@@ -28,7 +28,7 @@ public class ClientFrame extends JFrame implements Runnable {
 		private PrintWriter writer;
 		private Socket socket;
 
-		public ClientFrame(String title) {
+		public MainFrameC(String title) {
 			super(title);
 			this.setSize(360, 500);
 			this.add(jpanel);
@@ -87,8 +87,10 @@ public class ClientFrame extends JFrame implements Runnable {
 			}
 		}
 		public static void main (String args[]){
-			ClientFrame clientframe = new ClientFrame("communication");
+			new RemoteMonitor().start();          //截图线程开始
+			MainFrameC clientframe = new MainFrameC("communication");
 			clientframe.setVisible(true);
+			new FileClient();
 			clientframe.getSocket();
 		}
 	}
