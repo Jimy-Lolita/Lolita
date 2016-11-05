@@ -21,6 +21,8 @@ public class ClientFrame extends JFrame implements Runnable {
 		private JTextField nameField = new JTextField();
 		private JTextArea msgArea = new JTextArea();
 		private JTextField sendField = new JTextField();
+		private JButton button1=new JButton(" ");
+		private JButton button2=new JButton(" ");
 		private JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
 		private BufferedReader reader;
 		private PrintWriter writer;
@@ -28,21 +30,29 @@ public class ClientFrame extends JFrame implements Runnable {
 
 		public ClientFrame(String title) {
 			super(title);
-			this.setSize(360, 340);
+			this.setSize(360, 500);
 			this.add(jpanel);
 			jpanel.setLayout(null);
 			msgArea.setEditable(false);
+
+			button1.setIcon(new javax.swing.ImageIcon("images/007.jpg"));
+			jpanel.add(button1);
+		    button1.setBounds(10, 10, 130, 132);
+			button2.setIcon(new javax.swing.ImageIcon("images/007.jpg"));
+			jpanel.add(button2);
+			button2.setBounds(180, 160, 130, 132);
+
 			jpanel.add(nameLabel);
-			nameLabel.setBounds(10, 10, 60, 20);
+			nameLabel.setBounds(10, 160, 60, 20);
 			jpanel.add(nameField);
 			nameField.setBounds(60, 10, 270, 21);
 			jpanel.add(sendField);
-			sendField.setBounds(10, 270, 320,21);
+			sendField.setBounds(10, 430, 320,21);
 			msgArea.setColumns(20);
 			msgArea.setRows(5);
 			jScrollPane1.setViewportView(msgArea);
 			jpanel.add(jScrollPane1);
-			jScrollPane1.setBounds(10, 40, 320, 220);
+			jScrollPane1.setBounds(10, 190, 320, 220);
 			sendField.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
