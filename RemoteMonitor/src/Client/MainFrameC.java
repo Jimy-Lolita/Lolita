@@ -7,7 +7,10 @@ package Client;
 	import java.io.PrintWriter;
 	import java.net.Socket;
 
-	import javax.swing.JFrame;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 	import javax.swing.JLabel;
 	import javax.swing.JPanel;
 	import javax.swing.JScrollPane;
@@ -35,10 +38,14 @@ public class MainFrameC extends JFrame implements Runnable {
 			jpanel.setLayout(null);
 			msgArea.setEditable(false);
 
-			button1.setIcon(new javax.swing.ImageIcon("images/007.jpg"));
+
+			Icon runImg1 = new ImageIcon(this.getClass().getClassLoader().getResource("images/007.jpg"));
+			button1.setIcon(runImg1);
 			jpanel.add(button1);
 		    button1.setBounds(10, 10, 130, 132);
-			button2.setIcon(new javax.swing.ImageIcon("images/007.jpg"));
+		    
+		    Icon runImg2 = new ImageIcon(this.getClass().getClassLoader().getResource("images/007.jpg"));
+			button2.setIcon(runImg2);
 			jpanel.add(button2);
 			button2.setBounds(180, 160, 130, 132);
 
