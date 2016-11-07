@@ -24,12 +24,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+
+import ServerGUI.MainFrameS;
+import ServerGUI.MainFrameS;
 //屏幕监控的显示框用JButton,直接用一个setImageIcon(imaegIcon)就可以显示图片，就不用重画JFrame的背景
 public class  RemoteMonitored  extends JButton implements Runnable{  
     private static final long serialVersionUID = 1L;  
     Dimension screenSize;  
     private ServerSocket imgss;
     private Socket imgs;
+    public String ip=null;
     public  RemoteMonitored () {  
     	//this.setSize(width, height);//设置按钮的大小
     	try {
@@ -116,13 +120,19 @@ public class  RemoteMonitored  extends JButton implements Runnable{
 			try {
 				while((imgs = imgss.accept()) != null){
 					System.out.println("端口5001有连接");
+					
+					ip = imgs.getInetAddress().getHostAddress(); 
+					System.out.println("ip is:"+ip);
+					
 					InputStream is = imgs.getInputStream();
 					Image i = ImageIO.read(is);
 					if(i != null){
 						System.out.println("图片接受成功");
 						//对图像进行压缩，使得图片符合JButton大小
 						i = i.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
-						this.setIcon(new ImageIcon(i));
+						//this.setIcon(new ImageIcon(i));
+						//FIXME 每次收到图片，就刷新监控窗口的画面
+						MainFrameS.getInstance("FarContrl").setButtonWin(ip, i);
 					}
 				}
 			} catch (IOException e) {
