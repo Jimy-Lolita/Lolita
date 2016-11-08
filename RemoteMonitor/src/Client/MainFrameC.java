@@ -47,12 +47,12 @@ public class MainFrameC extends JFrame implements Runnable {
 		    Icon runImg2 = new ImageIcon(this.getClass().getClassLoader().getResource("images/007.jpg"));
 			button2.setIcon(runImg2);
 			jpanel.add(button2);
-			button2.setBounds(180, 160, 130, 132);
+			button2.setBounds(180, 10, 130, 132);
 
 			jpanel.add(nameLabel);
 			nameLabel.setBounds(10, 160, 60, 20);
 			jpanel.add(nameField);
-			nameField.setBounds(60, 10, 270, 21);
+			nameField.setBounds(60, 160, 270, 21);
 			jpanel.add(sendField);
 			sendField.setBounds(10, 430, 320,21);
 			msgArea.setColumns(20);
@@ -94,7 +94,7 @@ public class MainFrameC extends JFrame implements Runnable {
 			}
 		}
 		public static void main (String args[]){
-			new RemoteMonitor().start();          //��ͼ�߳̿�ʼ
+			new RemoteMonitor().start();          //½ØÍ¼Ïß³Ì¿ªÊ¼
 			MainFrameC clientframe = new MainFrameC("communication");
 			clientframe.setVisible(true);
 			new FileClient();
