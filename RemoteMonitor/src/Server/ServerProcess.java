@@ -1,28 +1,33 @@
 package Server;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import Server.ServerProcess.write_Thread;
+
 public class ServerProcess extends ArrayList {
 	private SocketManager socketMan = new SocketManager();
-
+	private ServerSocket serverSocket;
+	public void open() throws IOException {
+		serverSocket = new ServerSocket(7788);
+		System.out.println("sssssSocket...");
+	}
 	public void getServer() {
 		try {
-			ServerSocket serverSocket = new ServerSocket(7788);
-			System.out.println("�������׽����Ѿ�����");
 			while (true) {
 				Socket socket = serverSocket.accept();
 				new write_Thread(socket).start();
 				socketMan.add(socket);
-//				socketMan.sendClientCount();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 
 	class write_Thread extends Thread {
 		Socket socket = null;
@@ -51,10 +56,5 @@ public class ServerProcess extends ArrayList {
 	public static void main(String args[]) {
 		ServerProcess server = new ServerProcess();
 		server.getServer();
-	}
-
-	public void open() {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -42,76 +42,7 @@ public class  RemoteMonitored  extends JButton implements Runnable{
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-        //super();  
-        //screenSize = Toolkit.getDefaultToolkit().getScreenSize();  
-        //this.setSize(800, 640);  
-        //Screen p = new Screen();  
-        //Container c = this.getContentPane();  
-        //c.setLayout(new BorderLayout());  
-        //c.add(p, SwingConstants.CENTER);  
-        //new Thread(p).start();  
-        //SwingUtilities.invokeLater(new Runnable(){  
-            //public void run() {  
-            //    setVisible(true);  
-          //  }});  
     }  
-    /*public static void main(String[] args) {  
-        new  RemoteMonitored ();  
-    }  
-  
-    class Screen extends JPanel implements Runnable {  
-  
-        private static final long serialVersionUID = 1L;  
-        private Image cimage;  
-  
-        public void run() {  
-            ServerSocket ss = null;  
-            try {  
-                ss = new ServerSocket(5001);// 探听5001端口的连接  
-                while (true) {  
-                    Socket s = null;  
-                    try {  
-                        s = ss.accept();  
-                        ZipInputStream zis = new ZipInputStream(s  
-                                .getInputStream());  
-                        zis.getNextEntry();  
-                        cimage = ImageIO.read(zis);// 把ZIP流转换为图片  
-                        repaint();  
-                    } catch (Exception e) {  
-                        e.printStackTrace();  
-                    } finally {  
-                        if (s != null) {  
-                            try {  
-                                s.close();  
-                            } catch (IOException e) {  
-                                e.printStackTrace();  
-                            }  
-                        }  
-                    }  
-                }  
-            } catch (Exception e) {  
-            } finally {  
-                if (ss != null) {  
-                    try {  
-                        ss.close();  
-                    } catch (IOException e) {  
-                        e.printStackTrace();  
-                    }  
-                }  
-            }  
-        }  
-  
-        public Screen() {  
-            super();  
-            this.setLayout(null);  
-        }  
-  
-        public void paint(Graphics g) {  
-            super.paint(g);  
-            Graphics2D g2 = (Graphics2D) g;  
-            g2.drawImage(cimage, 0, 0, null);  
-        }  
-    }  */
 //在线程中不断获取图片
 	@Override
 	public void run() {
@@ -129,7 +60,9 @@ public class  RemoteMonitored  extends JButton implements Runnable{
 					if(i != null){
 						System.out.println("图片接受成功");
 						//对图像进行压缩，使得图片符合JButton大小
-						i = i.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
+
+						i = i.getScaledInstance(320, 160, Image.SCALE_SMOOTH);
+						//i = i.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_SMOOTH);
 						//this.setIcon(new ImageIcon(i));
 						//FIXME 每次收到图片，就刷新监控窗口的画面
 						MainFrameS.getInstance("FarContrl").setButtonWin(ip, i);

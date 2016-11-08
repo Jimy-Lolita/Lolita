@@ -5,9 +5,13 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import javax.imageio.ImageIO;
+
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
@@ -15,10 +19,10 @@ public class RemoteMonitor extends Thread {
 	private Dimension screenSize;
 	private Rectangle rectangle;
 	private Robot robot;
-
+	OutputStream os;
 	public RemoteMonitor() {
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		rectangle = new Rectangle(screenSize);// 鍙互鎸囧畾鎹曡幏灞忓箷鍖哄煙
+		rectangle = new Rectangle(screenSize);// 可以指定捕获屏幕区域
 		try {
 			robot = new Robot();
 		} catch (Exception e) {
@@ -28,21 +32,19 @@ public class RemoteMonitor extends Thread {
 	}
 
 	public void run() {
-		ZipOutputStream os = null;
+		os = null;
 		Socket socket = null;
 		while (true) {
 			try {
-				socket = new Socket("172.22.9.119", 5001);// 杩炴帴杩滅▼IP
-				BufferedImage image = robot.createScreenCapture(rectangle);// 鎹曡幏鍒跺畾灞忓箷鐭╁舰鍖哄煙
-				os = new ZipOutputStream(socket.getOutputStream());// 鍔犲叆鍘嬬缉娴�
+				socket = new Socket("172.25.51.17", 5001);// 连接远程IP
+				BufferedImage image = robot.createScreenCapture(rectangle);// 捕获制定屏幕矩形区域
 
-				os.setLevel(9);
-				os.putNextEntry(new ZipEntry("test.jpg"));
-				JPEGCodec.createJPEGEncoder(os).encode(image);// 鍥惧儚缂栫爜鎴怞PEG
+				os = socket.getOutputStream();
+				ImageIO.write(image, "JPEG", os);
+				
 				os.flush();
-				System.out.println("write");
-				os.close();
-				Thread.sleep(1000);// 姣忕20甯е�
+				socket.close();
+				Thread.sleep(1000);// 每秒20帧
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
