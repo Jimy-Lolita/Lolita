@@ -19,7 +19,7 @@ public class FileClientSocket {
     }
 
     /**
-     * 创建socket连接
+     * 麓麓陆篓socket脕卢陆脫
      * 
      * @throws Exception
      *             exception
